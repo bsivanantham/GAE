@@ -8,7 +8,6 @@ Based on:
 
 Thanks to OpenAI and morvanzhou for their examples
 """
-
 import tensorflow as tf
 import numpy as np
 import gym
@@ -16,24 +15,26 @@ import os
 import scipy.signal
 from gym import wrappers
 from datetime import datetime
-from PIL import Image
-import subprocess
+#from PIL import Image
+#import subprocess
 OUTPUT_RESULTS_DIR = "./"
 
 # ENVIRONMENT = 'Pendulum-v0'
 # ENVIRONMENT = 'MountainCarContinuous-v0'
 # ENVIRONMENT = 'LunarLanderContinuous-v2'
-ENVIRONMENT = 'BipedalWalker-v2'
+ENVIRONMENT = 'Ant-v2'
+# ENVIRONMENT = 'Walker2d-v2'
+# ENVIRONMENT = 'Humanoid-v2'
 # ENVIRONMENT = 'BipedalWalkerHardcore-v2'
 
-EP_MAX = 10000
+EP_MAX = 1000000
 GAMMA = 0.99
 LAMBDA = 0.95
 ENTROPY_BETA = 0.0
 LR = 0.0001
 BATCH = 4096
 MINI_BATCH = 128
-EPOCHS = 10
+EPOCHS = 100
 EPSILON = 0.2
 L2_REG = 0.01
 
@@ -45,7 +46,7 @@ class PPO(object):
     def __init__(self, environment):
         self.s_dim, self.a_dim = environment.observation_space.shape[0], environment.action_space.shape[0]
         self.a_bound = environment.action_space.high
-
+        self.x = 0
         assert BATCH % MINI_BATCH == 0
 
         config = tf.ConfigProto(device_count={'GPU': 0})
@@ -100,6 +101,7 @@ class PPO(object):
             self.atrain_op = a_opt.apply_gradients(zip(a_grads, a_vs))
             self.ctrain_op = c_opt.apply_gradients(zip(c_grads, c_vs))
 
+        self.saver = tf.train.Saver()
         self.writer = tf.summary.FileWriter(SUMMARY_DIR, self.sess.graph)
         self.sess.run(tf.global_variables_initializer())
 
@@ -126,6 +128,7 @@ class PPO(object):
                 self.sess.run(self.train_op, {self.state: s_split[i], self.actions: a_split[i],
                                               self.advantage: adv_split[i], self.rewards: r_split[i]})
 
+
         return self.sess.run(self.summarise, {self.state: s, self.actions: a, self.advantage: adv, self.rewards: r})
 
     def _build_anet(self, name, trainable):
@@ -134,6 +137,7 @@ class PPO(object):
         with tf.variable_scope(name):
             l1 = tf.layers.dense(self.state, 400, tf.nn.relu, trainable=trainable,
                                  kernel_regularizer=w_reg, name="pi_l1")
+            #print("variable"+l1.variable)
             l2 = tf.layers.dense(l1, 400, tf.nn.relu, trainable=trainable, kernel_regularizer=w_reg, name="pi_l2")
             mu = tf.layers.dense(l2, self.a_dim, tf.nn.tanh, trainable=trainable,
                                  kernel_regularizer=w_reg, name="pi_mu_out")
@@ -157,6 +161,7 @@ class PPO(object):
     def eval_state(self, state):
         action, value = self.sess.run([self.sample_op, self.v], {self.state: state[np.newaxis, :]})
         return action[0], value[0]
+
 
 
 def add_histogram(writer, tag, values, step, bins=1000):
@@ -203,10 +208,15 @@ ppo = PPO(env)
 t = 0
 buffer_s, buffer_a, buffer_r, buffer_v, terminals = [], [], [], [], []
 
+#ppo.saver.restore(ppo.sess, "/home/balavivek/Bala/SEM2/model/model.ckpt")
+
+
 for episode in range(EP_MAX):
     s = env.reset()
     ep_r, ep_t, terminal = 0, 0, True
     ep_a = []
+
+    ppo.saver.restore(ppo.sess, "/home/balavivek/Bala/SEM2/model/model.ckpt")
 
     while True:
         a, v = ppo.eval_state(s)
@@ -244,8 +254,12 @@ for episode in range(EP_MAX):
                                                                        ppo.advantage: badv, ppo.rewards: br})
                 ppo.writer.add_summary(graph_summary, episode)
                 ppo.writer.add_summary(worker_summary, episode)
+                #ppo.saver.save(ppo.sess, "/home/balavivek/Bala/SEM2/model/model.ckpt")
                 ppo.writer.flush()
+
                 break
+
+
 
         buffer_s.append(s)
         buffer_a.append(a)
@@ -256,9 +270,7 @@ for episode in range(EP_MAX):
         s, r, terminal, _ = env.step(np.clip(a, -ppo.a_bound, ppo.a_bound))
         buffer_r.append(r)
 
-        image_data = env.render()
-        img = Image.fromarray(image_data, 'RGB')
-        img.save("frames/frame-%.10d.png" % ep_t)
+
 
         ep_r += r
         ep_t += 1
@@ -266,10 +278,9 @@ for episode in range(EP_MAX):
 
     print('Episode: %i' % episode, "| Reward: %.2f" % ep_r, '| Steps: %i' % ep_t)
 
-subprocess.call([
-    'ffmpeg', '-framerate', '50', ' -y', '-i', ' frames/frame-%010d.png', '-r', '30', '-pix_fmt',
-    'yuv420p', 'video_name.mp4'
-])
+
+
+
 
 env.close()
 
