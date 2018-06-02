@@ -1,4 +1,4 @@
-#!"/home/balavivek/Bala/SEM2/High-Dimensional Continuous Control Using Generalized Advantage Estimation/ppo/venv/bin/python2"
+#!"/home/balavivek/Bala/SEM2/High-Dimensional Continuous Control Using Generalized Advantage Estimation/ppo/venv/bin/python"
 
 # -*- coding: utf-8 -*-
 import re
