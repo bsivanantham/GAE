@@ -4,9 +4,9 @@ literature implemented in TensorFlow.
 Most of my research is in the continuous domain, and I haven't spent much
 time testing these in discrete domains such as Atari etc.
 
-![PPO LSTM solving BipedalWalker-v2](https://github.com/Anjum48/rl-examples/blob/master/ppo/BipedalWalker_PPO-LSTM.gif)
+![PPO LSTM solving BipedalWalker-v2](https://github.com/anonymous73/GAE/blob/master/ppo/BipedalWalker_PPO-LSTM.gif)
 
-![PPO LSTM solving BipedalWalker-v2](https://github.com/Anjum48/rl-examples/blob/master/ppo/BipedalWalker_PPO-LSTM.png)
+![PPO LSTM solving BipedalWalker-v2](https://github.com/anonymous73/GAE/blob/master/ppo/BipedalWalker_PPO-LSTM.png)
 
 *BipedalWalker-v2 solved using PPO with a LSTM layer*
 
