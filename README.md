@@ -1,4 +1,4 @@
-# rl-examples
+# reinforcement learning algorithms with Generalized Advantage Estimation
 Examples of published reinforcement learning algorithms in recent
 literature implemented in TensorFlow.
 Most of my research is in the continuous domain, and I haven't spent much
@@ -27,20 +27,24 @@ Big thanks also to the TensorFlow community.
 - Where possible, I've added an LSTM layer to the policy and value functions.
 This usually made the more complex environments more stable (but slower)
 - DPPO is currently a bit unstable. Work in progress
+- PPO is completely working and ready for testing different enviroonment in MuJuCo.
+
+![PPO MuJuCo Ant-v2](https://github.com/anonymous73/GAE/blob/master/ppo/MuJuCoANT.gif)
+![PPO MuJuCo Humanoid-v2](https://github.com/anonymous73/GAE/blob/master/ppo/MuJuCoHumanoid.gif)
 
 ## Training
 All the Python scripts are written as standalone scripts. Just run them
 as you would for a single file or in your IDE. The models
 and TensorBoard summaries are saved in the same directory as the script.
-DPPO has a helper script to set off the worker threads
+
 
 ## Requirements
 - Python 3.5+
 - OpenAI Gym
 - TensorFlow 1.4
 - Numpy 1.13+
+- MuJoCo mjpro150
 
-DPPO was tested on a 16 core machine using CPU only, so the helper
-script will need to be updated for your particular setup.
+PPO was tested on a 16 core machine using CPU only.
 For my setup, there was usually no speed advantage training on the 
-CPU vs GPU (GTX 1080), but your performance may differ
+CPU vs GPU (GTX 1080), but your performance may differ.
