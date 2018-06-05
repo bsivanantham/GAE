@@ -1,0 +1,6 @@
+# this is a comment
+openaigym.video.0.18872.video000000.mp4 '/home/balavivek/Bala/SEM2/High-Dimensional Continuous Control Using Generalized Advantage Estimation/ppo/PPO/Ant-v2/20180527-012021/Ant-v2'
+openaigym.video.0.18872.video000001.mp4 '/home/balavivek/Bala/SEM2/High-Dimensional Continuous Control Using Generalized Advantage Estimation/ppo/PPO/Ant-v2/20180527-012021/Ant-v2'
+openaigym.video.0.18872.video000008.mp4 '/home/balavivek/Bala/SEM2/High-Dimensional Continuous Control Using Generalized Advantage Estimation/ppo/PPO/Ant-v2/20180527-012021/Ant-v2'
+openaigym.video.0.18872.video000027.mp4 '/home/balavivek/Bala/SEM2/High-Dimensional Continuous Control Using Generalized Advantage Estimation/ppo/PPO/Ant-v2/20180527-012021/Ant-v2'
+openaigym.video.0.18872.video000064.mp4 '/home/balavivek/Bala/SEM2/High-Dimensional Continuous Control Using Generalized Advantage Estimation/ppo/PPO/Ant-v2/20180527-012021/Ant-v2'
