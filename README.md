@@ -1,4 +1,5 @@
-# reinforcement learning algorithms with Generalized Advantage Estimation
+# Reinforcement learning algorithms with Generalized Advantage Estimation
+source : https://github.com/Anjum48/rl-examples/tree/56aca982fcf4426c02aa7e5fb58a4f8affab8020
 Examples of published reinforcement learning algorithms in recent
 literature implemented in TensorFlow.
 Most of my research is in the continuous domain, and I haven't spent much
@@ -31,6 +32,7 @@ This usually made the more complex environments more stable (but slower)
 
 ![PPO MuJuCo Ant-v2](https://github.com/anonymous73/GAE/blob/master/ppo/MuJuCoANT.gif)
 ![PPO MuJuCo Humanoid-v2](https://github.com/anonymous73/GAE/blob/master/ppo/MuJuCoHumanoid.gif)
+Source : https://gym.openai.com/envs/#mujoco 
 
 ## Training
 All the Python scripts are written as standalone scripts. Just run them
