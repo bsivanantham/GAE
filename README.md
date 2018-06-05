@@ -17,17 +17,13 @@ Big thanks also to the TensorFlow community.
 
 | Algorithm | Paper                                                   | 
 | --------- | ------------------------------------------------------- |
-| DPPG      | [Continuous control with deep reinforcement learning](https://arxiv.org/abs/1509.02971)     |
-| A3C       | [Asynchronous Methods for Deep Reinforcement Learning](https://arxiv.org/abs/1602.01783)    |
 | PPO       | [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347)                 |
-| DPPO      | [Emergence of Locomotion Behaviours in Rich Environments](https://arxiv.org/abs/1707.02286) |
 | GAE       | [High-Dimensional Continuous Control Using Generalized Advantage Estimation](https://arxiv.org/abs/1506.02438) |
 
 
 - GAE was used in all algorithms except for DPPG
 - Where possible, I've added an LSTM layer to the policy and value functions.
 This usually made the more complex environments more stable (but slower)
-- DPPO is currently a bit unstable. Work in progress
 - PPO is completely working and ready for testing different enviroonment in MuJuCo.
 
 ![PPO MuJuCo Ant-v2](https://github.com/anonymous73/GAE/blob/master/ppo/MuJuCoANT.gif)
@@ -50,3 +46,12 @@ and TensorBoard summaries are saved in the same directory as the script.
 PPO was tested on a 16 core machine using CPU only.
 For my setup, there was usually no speed advantage training on the 
 CPU vs GPU (GTX 1080), but your performance may differ.
+
+## Testing
+Python file ppo.py is a standalone file .Once MuJuCo installed and activated . 
+In the python file 'ppo.py' change the checkpoint saving directory to the desired 
+location or if you are using the check points available in the repository add 
+the file path . 
+Once these are done the python is file is good run . MuJuCo environment will pop up showing the 
+visulatisation and console or in the terminal based on the method of excuting the python file , 
+episode and its reward will be printed .
