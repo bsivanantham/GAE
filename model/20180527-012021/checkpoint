@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/balavivek/Bala/SEM2/model/model.ckpt"
+all_model_checkpoint_paths: "/home/balavivek/Bala/SEM2/model/model.ckpt"
