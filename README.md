@@ -1,6 +1,8 @@
 # Reinforcement learning algorithms with Generalized Advantage Estimation
 source : https://github.com/Anjum48/rl-examples/tree/56aca982fcf4426c02aa7e5fb58a4f8affab8020
 
+Visualization : https://youtu.be/BdZhJ5Y8WMY
+
 Examples of published reinforcement learning algorithms in recent
 literature implemented in TensorFlow.
 Most of my research is in the continuous domain, and I haven't spent much
